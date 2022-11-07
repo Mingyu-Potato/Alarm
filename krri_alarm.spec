@@ -8,7 +8,7 @@ a = Analysis(
     ['krri_alarm.py'],
     pathex=[],
     binaries=[],
-    datas=[('./music/*', 'music')],
+    datas=[('music/*', 'music'), ('*.ico', '.')],
     hiddenimports=['playsound:schedule:pycaw:comtypes:ctypes'],
     hookspath=[],
     hooksconfig={},
