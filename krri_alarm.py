@@ -7,6 +7,14 @@ from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 def volume_change():
     # Get default audio device using PyCAW
     devices = AudioUtilities.GetSpeakers()
@@ -30,7 +38,7 @@ def lunch():
     print('-----11:25분은 점심시간-----')
     
     volume_change()
-    playsound('C:\\Users\\실습생\\Mingyu\\krri_alarm\\music\\lunch.mp3')
+    playsound(resource_path(os.path.join('./', 'lunch.mp3')))
     
     print('-----Music End-----')
     print()
@@ -41,7 +49,7 @@ def getoffwork():
     print('-----17:55분은 퇴근시간-----')
     
     volume_change()
-    playsound('C:\\Users\\실습생\\Mingyu\\krri_alarm\\music\\getoffwork.mp3')
+    playsound(resource_path(os.path.join('./', 'getoffwork.mp3')))
     
     print('-----Music End-----')
     print()
@@ -65,5 +73,7 @@ def run():
 
 if __name__ == '__main__':
     global percent
-    percent = 0.7   # 0.0(min) ~ 1.0(max)
+    percent = 0.5   # 0.0(min) ~ 1.0(max)
     run()
+
+# pyinstaller -F krri_alarm.py --hidden-import playsound:schedule:pycaw:comtypes --add-data "music/*;." --add-data "*.ico;." -i="krri.ico"
