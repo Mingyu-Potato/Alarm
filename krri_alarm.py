@@ -7,20 +7,15 @@ from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
-def resource_path(relative_path):
-    try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
-
 def volume_change():
     # Get default audio device using PyCAW
     devices = AudioUtilities.GetSpeakers()
     interface = devices.Activate(
         IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
     volume = cast(interface, POINTER(IAudioEndpointVolume))
+        
+    # 음소거 토글 해제
+    volume.SetMute(0, None)
 
     # Get current volume 
     VolumeRangeDb = volume.GetVolumeRange()
@@ -33,14 +28,24 @@ def volume_change():
 def lunch():
     print('-----Music Start-----')
     print('-----11:25분은 점심시간-----')
-    # volume_change()
-    playsound(resource_path('./music/lunch.mp3'))
+    
+    volume_change()
+    playsound('C:\\Users\\실습생\\Mingyu\\krri_alarm\\music\\lunch.mp3')
+    
+    print('-----Music End-----')
+    print()
+    print('Schedule 실행 중...')
 
 def getoffwork():
     print('-----Music Start-----')
     print('-----17:55분은 퇴근시간-----')
-    # volume_change()
-    playsound(resource_path('./music/getoffwork.mp3'))
+    
+    volume_change()
+    playsound('C:\\Users\\실습생\\Mingyu\\krri_alarm\\music\\getoffwork.mp3')
+    
+    print('-----Music End-----')
+    print()
+    print('Schedule 실행 중...')
 
 def _init():
     schedule.every().day.at('11:25').do(lunch)
@@ -62,6 +67,3 @@ if __name__ == '__main__':
     global percent
     percent = 0.7   # 0.0(min) ~ 1.0(max)
     run()
-
-# window용(ubuntu도 가능)
-# pyinstaller -F krri_alarm.py --hidden-import playsound:schedule:pycaw:comtypes:ctypes --add-data "music/*;music" --add-data "*.ico;." -i="krri.ico" 
