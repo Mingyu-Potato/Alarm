@@ -1,18 +1,18 @@
-# 사용 방법
-<div>
-output 폴더의 krri_alarm.exe 파일을 실행하면 스케줄러 시간(11:25, 17:55)에 알람이 울린다.<br><br>
-만약, 시간이나 음악을 변경하고 싶다면, python 파일의 schedule 부분 혹은 음악 코드 부분을 수정 후,<br>
-<b>python 파일을 그냥 실행</b>하거나, <b>아래 auto_py_to_exe 사용 방법을 참고하여 exe 파일로 제작</b>해서 사용해도 된다.
-</div>
+## Introduction
+지정한 시간에 알람이 울리는 실행 파일이다.
+<br><br>
 
-### auto_py_to_exe 사용 방법
+## Code
+코드 사용방법은 아래와 같다.
 
-#### 주의사항
-If you want to put files in the root directory, put a period (.) in the destination.
+#### 간단하게 python 파일만 실행하는 방법
+1. krri_alarm.py의 init함수에서 원하는 시간을 입력한다.
+2. krri_alarm.py를 바로 실행한다.
 
-[install]
-1. pip install auto_py_to_exe
-2. auto_py_to_exe
----------------------------------
-[usage]
-3. python -m auto_py_to_exe
+#### 실행파일 파일로 제작 후 실행하는 방법
+1. krri_alarm.py의 init함수에서 원하는 시간을 입력한다.
+2. auto_py_to_exe 라이브러리를 설치한다.(pip install auto_py_to_exe)
+3. 파일이 있는 위치에서 명령어(python -m auto_py_to_exe)를 입력한다.
+<br><br>
+
+++ 주의사항 : 실행파일로 만들 파일들은 root 디렉터리와 동일한 경로에 위치해야 한다.
